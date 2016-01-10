@@ -40,6 +40,19 @@
 %% @end group
 %% @end example
 %%
+%% Multiple arguments correspond to multiple outputs of the
+%% function.  For example, the final @code{x} in this example
+%% specifies the third output (rather than the input):
+%% @example
+%% @group
+%% >> h = function_handle(x^2, 5*x, x);
+%% >> [a, b, c] = h(2)
+%%    @result{} a = 4
+%%    @result{} b = 10
+%%    @result{} c = 2
+%% @end group
+%% @end example
+%%
 %% The order and number of inputs can be specified:
 %% @example
 %% @group
@@ -67,7 +80,7 @@
 %% @end example
 %%
 %% FIXME: naming outputs with @var{PARAM} as
-%% 'outputs' not implemented.
+%% @code{outputs} not implemented.
 %%
 %% FIXME: does not ``optimize'' code, for example, using common
 %% subexpression elimination.
@@ -144,10 +157,7 @@ function f = function_handle(varargin)
               '    return (False, "expected symbols-to-declare to be empty")' ...
               'return (True, s)' };
       [worked, codestr] = python_cmd (cmd, expr);
-      %worked = false;
-      if (worked)
-        codestr = vectorize(codestr);
-      else
+      if (~worked)
         %% SymPy 0.7.5 has no octave_code command
         % Use a crude workaround (e.g., Abs, ceiling will fail).
         if (str2num(strrep(python_cmd ('return sp.__version__,'),'.',''))<=75 ...

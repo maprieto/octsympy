@@ -46,7 +46,7 @@
 %% angular frequency convention for L^2 functions and distributions.
 %%
 %% *WARNING*: As of SymPy 0.7.6 (June 2015), there are many problems
-%% with (inverse) Fourier transforms of non-smooth functions, even very 
+%% with (inverse) Fourier transforms of non-smooth functions, even very
 %% simple ones. Use at your own risk, or even better: help us fix SymPy.
 %%
 %% @seealso{fourier}
@@ -78,12 +78,11 @@ function f = ifourier(varargin)
             'else:'
             '    terms=(Fr,)'
             'for term in terms:'
-            '    #compute the Fourier transform '    
+            '    #compute the Fourier transform '
             '    r=sp.simplify(term*sp.exp(sp.I*x*k)).match(a_*sp.exp(b_))'
             '    # if a is constant and b/(I*k) is constant'
-            '    rlist=list(r.values())'
-            '    modulus=rlist[0]'
-            '    phase=rlist[1]/(sp.I*k)'
+            '    modulus=r[a_]'
+            '    phase=r[b_]/(sp.I*k)'
             '    if sp.diff(modulus,k)==0 and sp.diff(phase,k)==0:'
             '        f = f + modulus*2*sp.pi*sp.DiracDelta(phase)'
             '    else:'
@@ -111,12 +110,11 @@ function f = ifourier(varargin)
             'else:'
             '    terms=(Fr,)'
             'for term in terms:'
-            '    #compute the Fourier transform '    
+            '    #compute the Fourier transform '
             '    r=sp.simplify(term*sp.exp(sp.I*x*k)).match(a_*sp.exp(b_))'
             '    # if a is constant and b/(I*k) is constant'
-            '    rlist=list(r.values())'
-            '    modulus=rlist[0]'
-            '    phase=rlist[1]/(sp.I*k)'
+            '    modulus=r[a_]'
+            '    phase=r[b_]/(sp.I*k)'
             '    if sp.diff(modulus,k)==0 and sp.diff(phase,k)==0:'
             '        f = f + modulus*2*sp.pi*sp.DiracDelta(phase)'
             '    else:'
@@ -141,12 +139,11 @@ function f = ifourier(varargin)
             'else:'
             '    terms=(Fr,)'
             'for term in terms:'
-            '    #compute the Fourier transform '    
+            '    #compute the Fourier transform '
             '    r=sp.simplify(term*sp.exp(sp.I*x*k)).match(a_*sp.exp(b_))'
             '    # if a is constant and b/(I*k) is constant'
-            '    rlist=list(r.values())'
-            '    modulus=rlist[0]'
-            '    phase=rlist[1]/(sp.I*k)'
+            '    modulus=r[a_]'
+            '    phase=r[b_]/(sp.I*k)'
             '    if sp.diff(modulus,k)==0 and sp.diff(phase,k)==0:'
             '        f = f + modulus*2*sp.pi*sp.DiracDelta(phase)'
             '    else:'
